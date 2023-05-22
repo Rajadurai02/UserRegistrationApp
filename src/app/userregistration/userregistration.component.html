@@ -1,0 +1,43 @@
+<div class="container-fluid">
+        <h2>User Registration</h2>
+        <form [formGroup]="UserRegForm">
+    <!--         {{UserRegForm.value | json}}   -->
+            <div class="form-group">
+                <label>Enter UserName</label>
+                <input [class.is-invalid]="UserName?.invalid && UserName?.touched " type="text" class="form-control" formControlName="userName">
+                <div *ngIf="UserName?.invalid && UserName?.touched">
+                    <small class="text-danger" *ngIf="UserName?.errors?.['required']">Username cannot be empty</small>
+                    <small class="text-danger" *ngIf="UserName?.errors?.['invalidName']">Username cannot be - {{UserName?.errors?.['invalidName'].value}}</small>
+                </div>                
+            </div>
+            <div class="form-group">
+                <label>Enter Password</label>
+                <input [class.is-invalid]="Password?.invalid && Password?.touched" type="text" class="form-control" formControlName="password">
+                <div *ngIf="Password?.invalid && Password?.touched">
+                    <small class="text-danger" *ngIf="Password?.errors?.['required']">Password cannot be empty</small>
+                    <small class="text-danger" *ngIf="Password?.errors?.['minlength']">Password must contain 8 characters</small>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Confirm Password</label>
+                <input [class.is-invalid]="ConfirmPassword?.invalid && ConfirmPassword?.touched" type="text" class="form-control" formControlName="confirmpassword">
+                <small class="text-danger" *ngIf="UserRegForm?.errors?.['misMatch']">Passwords not matching</small>
+            </div>
+            <div formGroupName="UserAddress">
+                <label>Enter Address</label>
+                <div class="form-group">
+                    <label>City</label>
+                    <input type="text" class="form-control" formControlName="city">
+                </div>
+                <div class="form-group">
+                    <label>State</label>
+                    <input type="text" class="form-control" formControlName="state">
+                </div>
+                <div class="form-group">
+                    <label>PIN Code</label>
+                    <input type="text" class="form-control" formControlName="pincode">
+                </div>
+            </div>
+            <button type="submit">Register</button>
+        </form>
+    </div>
